@@ -73,3 +73,41 @@
   margin-top: 10px;
 }
 
+.todoCard {
+  width: 300px;
+  background-color: rgb(252, 252, 252);
+  border-radius: 8px;
+  padding: 10px 20px;
+  margin: 20px 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.todoCard:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.todoStatus {
+  font-size: 14px;
+  color: rgb(170, 170, 189);
+}
+
+.deleteBtn {
+  background-color: red;
+}
+
+.deleteBtn:hover {
+  background-color: darkred;
+}
+
+.completeBtn {
+  background-color: green;
+}
+
+.completeBtn:hover {
+  background-color: darkgreen;
+}
+
+.todoCardBtnGroup {
+  display: flex;
+  justify-content: space-between;
+}
