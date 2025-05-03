@@ -1,39 +1,25 @@
 import {useState, useEffect} from 'react';
 import $, { get } from "jquery";
 import TodoCard from './components/todo-card';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchTodos } from '../redux/todos/todoThunks';
 
 const GetTodos = () => {
 
-  const [todos, setTodos] = useState([]);
-
-  const getTodos = () => {
-    $.ajax({
-      type: "GET",
-      url: "http://localhost/React/BGS%20TODO/sandbox.php",
-      dataType: "json",
-      success(data) {
-        setTodos(data);
-        console.log("AJAX success:", data);
-      },
-      error(status, error) {
-        console.error("AJAX error:", status, error);
-      }
-    });
-  }
+    const {isLoading, todos, isError} = useSelector((state) => state.todos);
+    const dispatch = useDispatch();
 
   useEffect(() => {
-     getTodos();
-  });
+    dispatch(fetchTodos());
+  }, []); // [] means it will only run once when the component mounts
+
+  if (isLoading) return <p>Loading...</p>;
+  if (isError) return <p>Error fetching todos.</p>;
 
   return (
     <div>
         
         {todos.map((todo) => (
-        //   <li key={todo.id}>
-        //     <h3>{todo.title}</h3>
-        //     <p>{todo.description}</p>
-        //     <p>{todo.completed == 1 ? 'Completed' : 'Incomplete'}</p>
-        //   </li>
         <TodoCard
         id={todo.id}
         title={todo.title}

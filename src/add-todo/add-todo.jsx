@@ -4,7 +4,12 @@ import $ from "jquery";
 import FormInput from './components/form-input';
 import FormDropDown from './components/form-dropdown';
 
+import { useDispatch } from 'react-redux';
+import { createTodo } from '../redux/todos/todoThunks';
+
 const AddTodo = () => {
+
+  const dispatch = useDispatch();
 
     const [todo, setTodo] = useState({
         title: "",
@@ -23,19 +28,22 @@ const AddTodo = () => {
       };
     
       const handleSubmit = (e) => {
-        e.preventDefault();
-        $.ajax({
-          type: "POST",
-          url: "http://localhost/React/BGS%20TODO/sandbox.php",
-          data: todo, // send directly since it's json format
-          success(data) {
-            setResult(data);
-          },
-          error(status, error) {
-            console.error("AJAX error:", status, error);
-            setResult("Error submitting form");
-          }
-        });
+
+        dispatch(createTodo(todo));
+        
+        // e.preventDefault();
+        // $.ajax({
+        //   type: "POST",
+        //   url: "http://localhost/React/BGS%20TODO/sandbox.php",
+        //   data: todo, // send directly since it's json format
+        //   success(data) {
+        //     setResult(data);
+        //   },
+        //   error(status, error) {
+        //     console.error("AJAX error:", status, error);
+        //     setResult("Error submitting form");
+        //   }
+        // });
       };
 
 
