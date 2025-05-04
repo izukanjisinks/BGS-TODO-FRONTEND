@@ -31,6 +31,8 @@ const todoSlice = createSlice({
       })
 
       .addCase(updateTodo.fulfilled, (state, action) => {
+        console.log('this is the action payload');
+        console.log(action.payload);
         const idx = state.todos.findIndex(t => t.id === action.payload.id);
         if (idx !== -1) state.todos[idx] = action.payload;
       })

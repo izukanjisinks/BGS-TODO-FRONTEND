@@ -47,7 +47,7 @@ export const updateTodo = createAsyncThunk("todos/update", async (updatedTodo, t
     const data = await new Promise((resolve, reject) => {
       $.ajax({
         type: "POST", // or "PUT" depending on PHP endpoint
-        url: `http://localhost/React/BGS%20TODO/sandbox_update.php?id=${updatedTodo.id}`,
+        url: `http://localhost/React/BGS%20TODO/backend/update_todo.php?id=${updatedTodo.id}`,
         contentType: "application/json",
         data: JSON.stringify(updatedTodo),
         dataType: "json",
