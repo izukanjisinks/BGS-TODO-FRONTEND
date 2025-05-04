@@ -1,5 +1,5 @@
 import {createAsyncThunk } from '@reduxjs/toolkit';
-import $ from 'jquery';
+import $, { data } from 'jquery';
 
 
 export const fetchTodos = createAsyncThunk("todos/fetch", async (_, thunkAPI) => {
@@ -41,22 +41,23 @@ export const createTodo = createAsyncThunk("todos/create", async (newTodo, thunk
   }
 });
 
-
 export const updateTodo = createAsyncThunk("todos/update", async (updatedTodo, thunkAPI) => {
+  console.log(updatedTodo);
   try {
     const data = await new Promise((resolve, reject) => {
       $.ajax({
-        type: "POST", // or "PUT" depending on PHP endpoint
+        type: "POST",
         url: `http://localhost/React/BGS%20TODO/backend/update_todo.php?id=${updatedTodo.id}`,
         contentType: "application/json",
         data: JSON.stringify(updatedTodo),
-        dataType: "json",
+        dataType: 'json',
         success: resolve,
         error: (xhr, status, error) => reject(new Error(error))
       });
     });
-    return data;
+    return data; 
   } catch (err) {
+    console.error('Error in updateTodo thunk:', err.message);
     return thunkAPI.rejectWithValue(err.message);
   }
 });

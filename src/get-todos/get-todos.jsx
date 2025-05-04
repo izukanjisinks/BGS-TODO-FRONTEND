@@ -29,10 +29,10 @@ const GetTodos = () => {
 
     const handleSubmit = (e) => {
       e.preventDefault(); // Prevent the default form submission behavior
-      console.log(todo);
       setOpenModel(false);
       dispatch(updateTodo(todo)); // Use the dispatch instance directly
     }
+
     const handleChange = (e) => {
       //editing or updating the todo
       const { name, value } = e.target;
@@ -45,10 +45,10 @@ const GetTodos = () => {
     const editTodo = (id, title, description, completed) => {
       setTodo((prevTodo) => ({
         ...prevTodo, // Spread the previous state to retain other properties
-        id,
+        id: Number(id),
         title,
         description,
-        completed,
+        completed: Boolean(completed),
       }));
 
       if(!openModel) {
@@ -92,13 +92,13 @@ const GetTodos = () => {
       }
         
       { todos.map((todo) => (
-       <TodoCard
+       todo.completed == 1 && <TodoCard
        id={todo.id}
        title={todo.title}
        description={todo.description}  
        completed={todo.completed}
        editTodo={editTodo}
-       />
+       /> 
         )
        )
       }
