@@ -6,9 +6,10 @@ import { fetchTodos, updateTodo } from '../redux/todos/todoThunks';
 import FormInput from '../add-todo/components/form-input';
 import FormDropDown from '../add-todo/components/form-dropdown';
 
-const GetTodos = () => {
+const RenderTodos = ({todos, category}) => {
 
-    const {isLoading, todos, isError} = useSelector((state) => state.todos);
+   const todoCategory = category === 'completed' ? 1 : 0;
+    
     const [openModel, setOpenModel] = useState(false);
 
     const [todo, setTodo] = useState({
@@ -17,15 +18,6 @@ const GetTodos = () => {
       description: '',
       completed: false
     })
-    
-    const dispatch = useDispatch();
-
-    useEffect(() => {
-      dispatch(fetchTodos());
-    }, []); // [] means it will only run once when the component mounts
-
-    if (isLoading) return <p>Loading...</p>;
-    if (isError) return <p>Error fetching todos.</p>;
 
     const handleSubmit = (e) => {
       e.preventDefault(); // Prevent the default form submission behavior
@@ -92,7 +84,7 @@ const GetTodos = () => {
       }
         
       { todos.map((todo) => (
-       todo.completed == 1 && <TodoCard
+       todo.completed == todoCategory && <TodoCard
        id={todo.id}
        title={todo.title}
        description={todo.description}  
@@ -106,4 +98,4 @@ const GetTodos = () => {
   )
 }
 
-export default GetTodos
+export default RenderTodos

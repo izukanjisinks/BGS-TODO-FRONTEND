@@ -1,18 +1,32 @@
 import AddTodo from "../add-todo/add-todo";
-import GetTodos from "../get-todos/get-todos";
+import RenderTodos from "../get-todos/get-todos";
 import styles from "./css/homepage.module.css";
 import dashboardimg from "../assets/dashboard.png";
 import logo from "../assets/bgs.png";
 import plusIcon from "../assets/plus.png"
 import logoutIcon from "../assets/logout.png"
 import { useState } from "react";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { fetchTodos } from "../redux/todos/todoThunks";
 
 const HomePage = () => {
+
+  const {isLoading, todos, isError} = useSelector((state) => state.todos);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchTodos());
+  }, []); // [] means it will only run once when the component mounts
 
   const [addTodo, setAddTodo] = useState(false);
   const handleAddTodo = () => {
     setAddTodo(!addTodo);
   }
+
+  if (isLoading) return <p>Loading...</p>;
+    if (isError) return <p>Error fetching todos.</p>;
     
     return (
       <div className={styles.container}>
@@ -48,34 +62,14 @@ const HomePage = () => {
 
          <div className={styles.listContainer}>
           <div className={styles.listBackgroundContainer}>
-            <GetTodos/>
+            <RenderTodos todos={todos} category='completed'/>
           </div>  
-          <div className={styles.listBackgroundContainer}></div>
+          <div className={styles.listBackgroundContainer}>
+            <RenderTodos todos={todos} category='incomplete'/>
+          </div>
           <div className={styles.listBackgroundContainer}></div>
          </div>
-       
-        {/* <GetTodos/> */}
         </main>
-        {/* <nav >NavBar</nav>
-        <aside>SideBar</aside>
-        <main >
-          <div >
-            <h3>My TODOS</h3>
-            <button >New Todo</button>
-          </div>
-        
-          </main>
-        <footer>Footer</footer> */}
-      
-      {/* <div className="left">
-      <AddTodo/>
-      </div>
-      <div className="right">
-      <GetTodos/>
-      </div> */}
-
-
-       
       </div>
     );
 }
