@@ -3,7 +3,7 @@ import React from 'react'
 const FormInput = ({name, label, value, handleChange}) => {
   return (
         <div className='formGroup'>
-            <label className='labels' htmlFor="title">{label}</label>
+            <label className='labels' htmlFor={name}>{label}</label>
             <input
             className='input'
                 type="text"

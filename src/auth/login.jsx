@@ -49,6 +49,8 @@ function LoginForm({ toggleForm }) {
       setErrors(validationErrors);
     } else {
       dispatch(loginUser(formData));
+      setFormData({ email: "", password: "" });
+      setErrors({});
     }
   };
 
