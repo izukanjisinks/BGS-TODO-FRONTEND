@@ -7,7 +7,7 @@ export const fetchTodos = createAsyncThunk("todos/fetch", async (_, thunkAPI) =>
     const data = await new Promise((resolve, reject) => {
       $.ajax({
         type: "GET",
-        url: "http://localhost/React/BGS%20TODO/backend/get_todos.php",
+        url: "http://localhost/BGS-TODO/backend/get_todos.php",
         dataType: "json",
         success: resolve,
         error: (xhr, status, error) => reject(new Error(error))
@@ -26,7 +26,7 @@ export const createTodo = createAsyncThunk("todos/create", async (newTodo, thunk
     const data = await new Promise((resolve, reject) => {
       $.ajax({
         type: "POST",
-        url: "http://localhost/React/BGS%20TODO/backend/add_todo.php",
+        url: "http://localhost/BGS-TODO/backend/add_todo.php",
         contentType: "application/json",
         data: JSON.stringify(newTodo),
         dataType: "json",
@@ -47,7 +47,7 @@ export const updateTodo = createAsyncThunk("todos/update", async (updatedTodo, t
     const data = await new Promise((resolve, reject) => {
       $.ajax({
         type: "POST",
-        url: `http://localhost/React/BGS%20TODO/backend/update_todo.php?id=${updatedTodo.id}`,
+        url: `http://localhost/BGS-TODO/backend/update_todo.php?id=${updatedTodo.id}`,
         contentType: "application/json",
         data: JSON.stringify(updatedTodo),
         dataType: 'json',
@@ -68,7 +68,7 @@ export const deleteTodo = createAsyncThunk("todos/delete", async (id, thunkAPI) 
     const data = await new Promise((resolve, reject) => {
       $.ajax({
         type: "DELETE",
-        url: `http://localhost/React/BGS%20TODO/backend/delete_todo.php?id=${id}`,
+        url: `http://localhost/BGS-TODO/backend/delete_todo.php?id=${id}`,
         success: resolve,
         error: (xhr, status, error) => reject(new Error(error))
       });

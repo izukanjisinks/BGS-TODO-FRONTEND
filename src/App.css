@@ -61,9 +61,10 @@
 }
 
 .form {
+  display: grid;
   align-items: center;
   justify-content: center;
-  height: 300px;
+  height: auto;
   width: 330px;
   position: absolute;
   top: 50%;
@@ -74,6 +75,15 @@
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(32, 31, 31, 0.2);
 }
+
+.register-form{
+  min-height: 350px;
+}
+
+.login-form {
+  min-height: 250px;
+}
+
 
 .labels {
   color: rgb(81, 78, 78);
@@ -175,4 +185,14 @@
 .todoCardBtnGroup {
   display: flex;
   /* justify-content: space-between; */
+}
+
+.toggle-text{
+  font-weight: bold;
+  cursor: pointer;
+}
+
+p{
+  display: flex;
+  justify-content: center;
 }
