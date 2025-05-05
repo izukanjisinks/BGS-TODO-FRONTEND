@@ -21,6 +21,10 @@ const HomePage = () => {
   const { user } = useSelector((state) => state.login); // Assuming `state.login` contains user info
   const dispatch = useDispatch();
 
+  // const todoCategory = category === 'completed' ? true : false;
+  const completedTodos = todos.filter((todo) => todo.completed == true);
+  const incompletedTodos = todos.filter((todo) => todo.completed == false);
+
   useEffect(() => {
     if (!user) {
        navigate("/"); 
@@ -38,7 +42,7 @@ const HomePage = () => {
   const handleLogout = () => {
       dispatch(logout()); // Dispatch the logout action to clear user state
       localStorage.removeItem("user");
-      // navigate("/");
+      navigate("/");
   };
 
   if (isLoading) return <p>Loading...</p>;
@@ -95,10 +99,10 @@ const HomePage = () => {
 
         <div className={styles.listContainer}>
           <div className={styles.listBackgroundContainer}>
-            <RenderTodos todos={todos} category="completed" />
+            <RenderTodos todos={completedTodos} category="completed" />
           </div>
           <div className={styles.listBackgroundContainer}>
-            <RenderTodos todos={todos} category="incomplete" />
+            <RenderTodos todos={incompletedTodos} category="incomplete" />
           </div>
           <div className={styles.listBackgroundContainer}>
             <div className={styles.progressBar}>

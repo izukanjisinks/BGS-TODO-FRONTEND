@@ -8,8 +8,10 @@ import FormDropDown from '../add-todo/components/form-dropdown';
 
 const RenderTodos = ({todos, category}) => {
 
-   const todoCategory = category === 'completed' ? 1 : 0;
-    
+   
+
+
+  
     const [openModel, setOpenModel] = useState(false);
 
     const dispatch = useDispatch();
@@ -22,9 +24,9 @@ const RenderTodos = ({todos, category}) => {
     })
 
     const handleSubmit = (e) => {
-      e.preventDefault(); // Prevent the default form submission behavior
+      e.preventDefault(); 
       setOpenModel(false);
-      dispatch(updateTodo(todo)); // Use the dispatch instance directly
+      dispatch(updateTodo(todo)); 
     }
 
     const handleChange = (e) => {
@@ -80,24 +82,25 @@ const RenderTodos = ({todos, category}) => {
         name="completed"
         label="COMPLETED"
         handleChange={handleChange}
-        value={todo.completed} //boolean indicating wthether the task is completed or not   
+        value={todo.completed} //boolean indicating whether the task is completed or not   
         />
     
         <button className='button' type="submit">SUBMIT</button>
         </form> : null
       }
+
         
-      { todos.map((todo) => (
-       todo.completed == todoCategory && <TodoCard
-       id={todo.id}
-       title={todo.title}
-       description={todo.description}  
-       completed={todo.completed}
-       editTodo={editTodo}
-       /> 
-        )
-       )
-      }
+      {todos.map((item) => (
+    <TodoCard
+      key={item.id}
+      id={item.id}
+      title={item.title}
+      description={item.description}  
+      completed={item.completed}
+      editTodo={editTodo}
+    />
+))}
+
     </div>
   )
 }
