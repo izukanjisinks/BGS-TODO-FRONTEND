@@ -1,12 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
 import FormInput from "../add-todo/components/form-input";
 import { useDispatch, useSelector } from "react-redux";
-import { loginUser } from "../redux/user/loginThunk"; 
+import { loginUser } from "../redux/user/loginThunk";
 
-function LoginForm({toggleForm}) {
+function LoginForm({ toggleForm }) {
 
   const dispatch = useDispatch();
-  const {user , status, error } = useSelector((state) => state.login);
+  const navigate = useNavigate();
+
+  const { user, status, error } = useSelector((state) => state.login);
 
   const [formData, setFormData] = useState({
     email: "",
@@ -17,7 +20,6 @@ function LoginForm({toggleForm}) {
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
-    // Clear error on input change
     setErrors({ ...errors, [e.target.name]: "" });
   };
 
@@ -50,33 +52,38 @@ function LoginForm({toggleForm}) {
     }
   };
 
+  // Use useEffect to navigate after successful login
+  useEffect(() => {
+    if (status.status === "success" && user) {
+      navigate("/homepage");
+    }
+  }, [status, user, navigate]);
+
   return (
     <form className="form login-form" onSubmit={handleSubmit} noValidate>
-
       <div>
-      <FormInput
+        <FormInput
           name="email"
           label="EMAIL"
           handleChange={handleChange}
           value={formData.email}
-      />
-      {/* {status['status'] === 'error' ? <p style={{ color: "red" }}> {status['message']}</p>  : null}  */}
-      {errors.email && <p style={{ color: "red" }}>{errors.email}</p>}
+        />
+        {errors.email && <p style={{ color: "red" }}>{errors.email}</p>}
       </div>
 
       <div>
-      <FormInput
+        <FormInput
           name="password"
           label="PASSWORD"
           handleChange={handleChange}
           value={formData.password}
-      />
-      {status['status'] === 'error' ? <p style={{ color: "red" }}> {status['message']}</p>  : null}
+        />
+        {status === "error" && <p style={{ color: "red" }}>{error}</p>}
         {errors.password && <p style={{ color: "red" }}>{errors.password}</p>}
       </div>
 
-      <button className="button" type="submit">REGISTER</button>
-      <p>Don't have an account? <span className="toggle-text" onClick={toggleForm}>REGISTER</span> </p>
+      <button className="button" type="submit">LOGIN</button>
+      <p>Don't have an account? <span className="toggle-text" onClick={toggleForm}>REGISTER</span></p>
     </form>
   );
 }

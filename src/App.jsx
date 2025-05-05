@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { Route, Routes } from 'react-router-dom';
 import './App.css'
 import HomePage from './home/homepage'
 import RegistrationForm from './auth/register'
@@ -16,7 +16,12 @@ function App() {
 
   return (
     <>
-    {login ? <RegistrationForm toggleForm={toggleForm}/> : <LoginForm toggleForm={toggleForm}/>}
+    <Routes>
+         <Route path='/' element={<LoginForm/>} /> {/* make this default landing page when app is opened! */}
+         <Route path='/register' element={<RegistrationForm/>} />
+         <Route path='/homepage' element={<HomePage/>} />
+       </Routes>
+    {/* {login ? <RegistrationForm toggleForm={toggleForm}/> : <LoginForm toggleForm={toggleForm}/>} */}
        {/* <HomePage/> */}
     </>
   )
