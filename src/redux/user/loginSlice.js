@@ -1,10 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { loginUser } from "./loginThunk";
 
+const savedUser = JSON.parse(localStorage.getItem("user"));
+
 const loginSlice = createSlice({
   name: "login",
   initialState: {
-    user: null,
+    user: savedUser || null,
     status: "idle", // 'idle' | 'loading' | 'succeeded' | 'failed'
     error: null
   },
@@ -28,6 +30,8 @@ const loginSlice = createSlice({
         state.status = action.payload;
         state.user = action.payload;
         console.log(action.payload);
+        // Save user data to localStorage to maintain session
+        localStorage.setItem("user", JSON.stringify(action.payload));
       })
       .addCase(loginUser.rejected, (state, action) => {
         state.status = "failed";

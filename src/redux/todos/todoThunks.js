@@ -2,12 +2,12 @@ import {createAsyncThunk } from '@reduxjs/toolkit';
 import $, { data } from 'jquery';
 
 
-export const fetchTodos = createAsyncThunk("todos/fetch", async (_, thunkAPI) => {
+export const fetchTodos = createAsyncThunk("todos/fetch", async (userId, thunkAPI) => {
   try {
     const data = await new Promise((resolve, reject) => {
       $.ajax({
         type: "GET",
-        url: "http://localhost/BGS-TODO/backend/get_todos.php",
+        url: "http://localhost/BGS-TODO/backend/get_todos.php?user_id=" + userId,
         dataType: "json",
         success: resolve,
         error: (xhr, status, error) => reject(new Error(error))

@@ -16,18 +16,19 @@ import { useNavigate } from "react-router-dom";
 import {logout} from "../redux/user/loginSlice";
 
 const HomePage = () => {
-  const navigate = useNavigate();
+   const navigate = useNavigate();
   const { isLoading, todos, isError } = useSelector((state) => state.todos);
   const { user } = useSelector((state) => state.login); // Assuming `state.login` contains user info
   const dispatch = useDispatch();
 
   useEffect(() => {
     if (!user) {
-      navigate("/"); 
+       navigate("/"); 
     } else {
-      dispatch(fetchTodos());
+      //only fetch todos with a specified user id
+      dispatch(fetchTodos(user.user.id));
     }
-  }, [user, navigate, dispatch]);
+  }, [user, dispatch]);
 
   const [addTodo, setAddTodo] = useState(false);
   const handleAddTodo = () => {
@@ -36,7 +37,8 @@ const HomePage = () => {
 
   const handleLogout = () => {
       dispatch(logout()); // Dispatch the logout action to clear user state
-      navigate("/");
+      localStorage.removeItem("user");
+      // navigate("/");
   };
 
   if (isLoading) return <p>Loading...</p>;
@@ -44,7 +46,7 @@ const HomePage = () => {
 
   return (
     <div className={styles.container}>
-      {addTodo ? <AddTodo /> : null}
+      {addTodo ? <AddTodo handleAddTodo={handleAddTodo} /> : null}
 
       <div className={styles.sidebar}>
         <div className={styles.logo}>

@@ -16,8 +16,8 @@ function App() {
 
   return (
     <>
-    <Routes>
-         <Route path='/' element={<LoginForm/>} /> {/* make this default landing page when app is opened! */}
+      <Routes>
+         <Route path='/' element={<LoginForm/>} /> 
          <Route path='/register' element={<RegistrationForm/>} />
          <Route path='/homepage' element={<HomePage/>} />
        </Routes>
