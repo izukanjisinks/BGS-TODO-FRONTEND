@@ -7,7 +7,7 @@ const FormDropDown = ({name, label, value, handleChange}) => {
         <select
           className='input'
           name={name}
-          value={value} //boolean indicating wthether the task is completed or not
+          value = {value === 1 ? 'Yes' : 'No'} // Convert boolean to string
           onChange={handleChange}
         >
           <option value="false">No</option>

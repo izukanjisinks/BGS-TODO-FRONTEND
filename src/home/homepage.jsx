@@ -1,5 +1,5 @@
 import AddTodo from "../add-todo/add-todo";
-import RenderTodos from "../get-todos/get-todos";
+import RenderTodos from "../get-todos/render-todos";
 import styles from "./css/homepage.module.css";
 import dashboardimg from "../assets/dashboard.png";
 import logo from "../assets/bgs.png";
@@ -10,6 +10,7 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { fetchTodos } from "../redux/todos/todoThunks";
+import ProgressBar from "../progress-bar/progress-bar";
 
 const HomePage = () => {
 
@@ -60,6 +61,21 @@ const HomePage = () => {
               </button>
           </div>
 
+          <div className={styles.todosHeaderCategories}> 
+            <div className={styles.categoryHeader}>
+              <div className={styles.categoryColor1}></div>
+              Completed
+            </div>
+            <div className={styles.categoryHeader}>
+              <div className={`${styles.categoryColor1} ${styles.categoryColor2}`}></div>
+              Incomplete
+            </div>
+            <div className={styles.categoryHeader}>
+              <div className={`${styles.categoryColor1} ${styles.categoryColor3}`}></div>
+              Progress
+            </div>
+          </div>
+
          <div className={styles.listContainer}>
           <div className={styles.listBackgroundContainer}>
             <RenderTodos todos={todos} category='completed'/>
@@ -67,7 +83,11 @@ const HomePage = () => {
           <div className={styles.listBackgroundContainer}>
             <RenderTodos todos={todos} category='incomplete'/>
           </div>
-          <div className={styles.listBackgroundContainer}></div>
+          <div className={styles.listBackgroundContainer}>
+            <div className={styles.progressBar}>
+              <ProgressBar percentage={Math.round((todos.filter(todo => todo.completed == 1).length / todos.length) * 100)} />
+            </div>
+          </div>
          </div>
         </main>
       </div>

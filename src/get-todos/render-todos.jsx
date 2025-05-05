@@ -12,6 +12,8 @@ const RenderTodos = ({todos, category}) => {
     
     const [openModel, setOpenModel] = useState(false);
 
+    const dispatch = useDispatch();
+
     const [todo, setTodo] = useState({
       id : 0,
       title: '',
@@ -26,6 +28,7 @@ const RenderTodos = ({todos, category}) => {
     }
 
     const handleChange = (e) => {
+      
       //editing or updating the todo
       const { name, value } = e.target;
       setTodo((prevTodo) => ({
@@ -35,12 +38,13 @@ const RenderTodos = ({todos, category}) => {
     }
 
     const editTodo = (id, title, description, completed) => {
+      console.log(completed);
       setTodo((prevTodo) => ({
         ...prevTodo, // Spread the previous state to retain other properties
         id: Number(id),
         title,
         description,
-        completed: Boolean(completed),
+        completed: completed === 1 ? true : false,
       }));
 
       if(!openModel) {
