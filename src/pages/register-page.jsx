@@ -134,6 +134,7 @@ function RegistrationPage() {
           name="password"
           label="PASSWORD"
           handleChange={handleChange}
+          type="password"
           value={formData.password}
       />
         {errors.password && <p style={{ color: "red" }}>{errors.password}</p>}
@@ -144,6 +145,7 @@ function RegistrationPage() {
           name="confirmPassword"
           label="CONFIRM PASSWORD"
           handleChange={handleChange}
+          type="password"
           value={formData.confirmPassword}
       />
         {errors.confirmPassword && (

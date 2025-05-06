@@ -89,9 +89,10 @@ function LoginPage() {
           name="password"
           label="PASSWORD"
           handleChange={handleChange}
+          type="password"
           value={formData.password}
         />
-        {status === "error" && <p style={{ color: "red" }}>{error}</p>}
+        {status.status === "error" && <p style={{ color: "red" }}>Invalid Login Credentials</p>}
         {errors.password && <p style={{ color: "red" }}>{errors.password}</p>}
       </div>
 
@@ -99,7 +100,6 @@ function LoginPage() {
       <p>Don't have an account? &nbsp; <span className="toggle-text" onClick={toggleForm}>REGISTER</span></p>
     </form>
      </div>
-    
   );
 }
 

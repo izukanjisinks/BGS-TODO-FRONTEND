@@ -6,9 +6,19 @@
     color: white;
     margin-bottom: 10px;
     display: flex;
-    margin-top: 12px;
-    margin-left: 12px;
-    /* margin-right: auto;  */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.todoButton{
+  background-color: rgb(119, 119, 245);
+  border-radius: 4px;
+  border: none;
+  padding: 8px 20px;
+  color: white;
+  margin-bottom: 10px;
+  margin-right: 12px;
+  display: flex;
 }
 
 .button:hover {
@@ -18,19 +28,21 @@
 
 .formGroup {
     height: 50px;
-    margin: 5px 0px;
+    margin: 30px 0px;
 }
 
 .form {
+  z-index: 1;
+  display: grid;
     align-items: center;
     justify-content: center;
-    height: 300px;
+    height: auto;
     width: 330px;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    padding: 30px;
+    padding: 10px;
     background-color: white;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(32, 31, 31, 0.2);
@@ -38,17 +50,23 @@
 
 .labels {
     color: black;
-    font-size: 18px;
-    margin-bottom: 10px; /* Adds space below each label */
+    font-size: 16px;
+    margin-bottom: 15px; 
+    font-weight: bold;
 }
 
 .input {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-    margin-top: 10px;
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin-top: 10px;
+  background-color: #f0f0f0;
+}
+
+.input:focus {
+  outline: none;
 }
 
 .popUpMenuBtn{
@@ -86,6 +104,8 @@
   }
 
   .todoStatus {
+    display: flex;
+    justify-content: start;
     font-size: 14px;
     color: rgb(170, 170, 189);
   }

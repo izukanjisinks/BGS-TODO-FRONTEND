@@ -1,11 +1,12 @@
 import React from 'react'
+import styles from '../../css/add-todo.module.css'
 
 const FormDropDown = ({name, label, value, handleChange}) => {
   return (
     <div className='formGroup'>
-        <label className='labels' htmlFor="completed">{label}</label>
+        <label className={styles.labels} htmlFor="completed">{label}</label>
         <select
-          className='input'
+          className={styles.input}
           name={name}
           value = {value ? "true" : "false"} 
           onChange={handleChange}

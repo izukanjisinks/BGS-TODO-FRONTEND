@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchTodos, updateTodo } from '../redux/todos/todoThunks';
 import FormInput from './form-components/form-input';
 import FormDropDown from './form-components/form-dropdown';
+import styles from '../css/add-todo.module.css'
 
 const RenderTodos = ({todos, category}) => {
 
@@ -74,7 +75,7 @@ const RenderTodos = ({todos, category}) => {
     <div>
       {openModel ? 
       
-      <form className='form' onSubmit={handleSubmit}>
+      <form className={styles.form} onSubmit={handleSubmit}>
     
         <FormInput
           label="TITLE"

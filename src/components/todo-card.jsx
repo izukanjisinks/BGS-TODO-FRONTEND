@@ -22,9 +22,9 @@ const TodoCard = ({id, title, description, completed, editTodo}) => {
         <p className={styles.todoDescription}>{description}</p>        
         <p className={styles.todoStatus}>Status: {completed == 1 ? 'Completed' : 'Incomplete'}</p>
         <div className={styles.todoCardBtnGroup}>
-            <button className={`${styles.button} ${styles.deleteBtn}`} 
+            <button className={`${styles.todoButton}`} onClick={()=>editTodo(id, title, description, completed)} >Edit</button>
+            <button className={`${styles.todoButton} ${styles.deleteBtn}`} 
             onClick={handleDeletion}>Delete</button>
-            <button className={styles.button} onClick={()=>editTodo(id, title, description, completed)} >Edit</button>
         </div>
     </div>
   )

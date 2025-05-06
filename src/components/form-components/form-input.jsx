@@ -1,13 +1,13 @@
 import React from 'react'
-import styles from '../../css/auth.module.css'
+import styles from '../../css/add-todo.module.css'
 
-const FormInput = ({name, label, value, handleChange,}) => {
+const FormInput = ({name, label, value, handleChange, type='text'}) => {
   return (
         <div className={styles.formGroup}>
             <label className={styles.labels} htmlFor="title">{label}</label>
             <input
             className={styles.input}
-                type="text"
+                type={type}
                 name={name}
                 value={value}
                 onChange={handleChange}

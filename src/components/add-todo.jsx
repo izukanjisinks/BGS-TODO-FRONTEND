@@ -3,6 +3,7 @@ import { useState } from 'react';
 import FormInput from './form-components/form-input';
 import { useDispatch, useSelector } from 'react-redux';
 import { createTodo } from '../redux/todos/todoThunks';
+import styles from '../css/add-todo.module.css'
 
 const AddTodo = ({ handleAddTodo }) => {
   const dispatch = useDispatch();
@@ -52,7 +53,7 @@ const AddTodo = ({ handleAddTodo }) => {
 
   return (
     <>
-      <form className="form" onSubmit={handleSubmit}>
+      <form className={styles.form} onSubmit={handleSubmit}>
         <div>
           <FormInput
             label="TITLE"
@@ -73,7 +74,7 @@ const AddTodo = ({ handleAddTodo }) => {
           {errors.description && <p style={{ color: 'red' }}>{errors.description}</p>}
         </div>
 
-        <button className="button" type="submit">SUBMIT</button>
+        <button className={styles.button} type="submit">SUBMIT</button>
       </form>
     </>
   );

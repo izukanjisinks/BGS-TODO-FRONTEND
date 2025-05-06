@@ -64,7 +64,6 @@ export const updateTodo = createAsyncThunk("todos/update", async (updatedTodo, t
   }
 });
 
-
 export const deleteTodo = createAsyncThunk("todos/delete", async (id, thunkAPI) => {
 
   try {
