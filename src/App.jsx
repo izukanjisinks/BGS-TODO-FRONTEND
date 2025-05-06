@@ -1,10 +1,9 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
 import { Route, Routes } from 'react-router-dom';
 import './App.css'
-import HomePage from './home/homepage'
-import RegistrationForm from './auth/register'
-import LoginForm from './auth/login'
+import HomePage from './pages/home-page'
+import RegistrationPage from './pages/register-page'
+import LoginPage from './pages/login-page'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -17,8 +16,8 @@ function App() {
   return (
     <>
       <Routes>
-         <Route path='/' element={<LoginForm/>} /> 
-         <Route path='/register' element={<RegistrationForm/>} />
+         <Route path='/' element={<LoginPage/>} /> 
+         <Route path='/register' element={<RegistrationPage/>} />
          <Route path='/homepage' element={<HomePage/>} />
        </Routes>
     {/* {login ? <RegistrationForm toggleForm={toggleForm}/> : <LoginForm toggleForm={toggleForm}/>} */}

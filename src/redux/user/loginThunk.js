@@ -6,9 +6,9 @@ export const loginUser = createAsyncThunk(
   async (formData, { rejectWithValue }) => {
     try {
       const response = await $.ajax({
-        url: "http://localhost/BGS-TODO/backend/users/login_user.php", // Replace with your real API URL
+        url: "http://localhost/React/BGS%20TODO/backend/users/login_user.php", 
         method: "POST",
-        data: formData,
+        data: JSON.stringify(formData),
         dataType: "json"
       });
       console.log(response);

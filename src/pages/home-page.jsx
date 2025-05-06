@@ -1,27 +1,25 @@
-import AddTodo from "../add-todo/add-todo";
-import RenderTodos from "../get-todos/render-todos";
-import styles from "./css/homepage.module.css";
+import AddTodo from "../components/add-todo";
+import RenderTodos from "../components/render-todos";
+import styles from "../css/homepage.module.css";
 import dashboardimg from "../assets/dashboard.png";
 import logo from "../assets/bgs.png";
 import plusIcon from "../assets/plus.png";
 import logoutIcon from "../assets/logout.png";
-import { useState } from "react";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
-import { useEffect } from "react";
+import { useDispatch,useSelector } from "react-redux";
+import { useEffect, useState } from "react";
 import { fetchTodos } from "../redux/todos/todoThunks";
-import ProgressBar from "../progress-bar/progress-bar";
+import ProgressBar from "../components/progress-bar";
 import { useNavigate } from "react-router-dom";
 
 import {logout} from "../redux/user/loginSlice";
 
 const HomePage = () => {
-   const navigate = useNavigate();
+  
+  const navigate = useNavigate();
   const { isLoading, todos, isError } = useSelector((state) => state.todos);
-  const { user } = useSelector((state) => state.login); // Assuming `state.login` contains user info
+  const { user } = useSelector((state) => state.login);
   const dispatch = useDispatch();
 
-  // const todoCategory = category === 'completed' ? true : false;
   const completedTodos = todos.filter((todo) => todo.completed == true);
   const incompletedTodos = todos.filter((todo) => todo.completed == false);
 
@@ -70,6 +68,8 @@ const HomePage = () => {
         </div>
       </div>
       <main className={styles.main}>
+        
+        <div className={styles.mainTop}>
         <div className={styles.todosHeader}>
           <h3>My TODOS</h3>
           <button className={styles.newTodoBtn} onClick={handleAddTodo}>
@@ -96,25 +96,29 @@ const HomePage = () => {
             Progress
           </div>
         </div>
+        </div>
 
+        <div className={styles.mainTop}>
         <div className={styles.listContainer}>
           <div className={styles.listBackgroundContainer}>
-            <RenderTodos todos={completedTodos} category="completed" />
+          {todos.length > 0 ? <RenderTodos todos={completedTodos} category="complete" /> : <p className={styles.noTodosText}>No Todos Available</p> }
+
           </div>
           <div className={styles.listBackgroundContainer}>
-            <RenderTodos todos={incompletedTodos} category="incomplete" />
+           {todos.length > 0 ? <RenderTodos todos={incompletedTodos} category="incomplete" /> : <p className={styles.noTodosText}>No Todos Available</p> }
           </div>
           <div className={styles.listBackgroundContainer}>
             <div className={styles.progressBar}>
               <ProgressBar
-                percentage={Math.round(
+                percentage={todos.length > 0 ? Math.round(
                   (todos.filter((todo) => todo.completed == 1).length /
                     todos.length) *
                     100
-                )}
+                ) : 0}
               />
             </div>
           </div>
+        </div>
         </div>
       </main>
     </div>

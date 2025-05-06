@@ -1,10 +1,10 @@
 import {useState, useEffect} from 'react';
 import $, { get } from "jquery";
-import TodoCard from './components/todo-card';
+import TodoCard from './todo-card';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchTodos, updateTodo } from '../redux/todos/todoThunks';
-import FormInput from '../add-todo/components/form-input';
-import FormDropDown from '../add-todo/components/form-dropdown';
+import FormInput from './form-components/form-input';
+import FormDropDown from './form-components/form-dropdown';
 
 const RenderTodos = ({todos, category}) => {
 
@@ -38,6 +38,18 @@ const RenderTodos = ({todos, category}) => {
         [name]: value
       }));
     }
+
+    const setTodoStatus = (e) => {
+      const { name, value } = e.target;
+      const parsedValue = name === "completed" ? value === "true" : value;
+      console.log(parsedValue);
+      setTodo((prevTodo) => ({
+        ...prevTodo,
+        completed: parsedValue
+      }));
+
+      console.log(todo);
+    };
 
     const editTodo = (id, title, description, completed) => {
       console.log(completed);
@@ -81,7 +93,7 @@ const RenderTodos = ({todos, category}) => {
         <FormDropDown
         name="completed"
         label="COMPLETED"
-        handleChange={handleChange}
+        handleChange={setTodoStatus}
         value={todo.completed} //boolean indicating whether the task is completed or not   
         />
     

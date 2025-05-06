@@ -14,7 +14,7 @@ const registerSlice = createSlice({
       state.user = null;
       state.status = "idle";
       state.error = null;
-    }
+    },
   },
   
   extraReducers: (builder) => {
@@ -27,7 +27,6 @@ const registerSlice = createSlice({
       .addCase(registerUser.fulfilled, (state, action) => {
         state.status = action.payload;
         state.user = action.payload;
-        console.log(action.payload);
       })
       .addCase(registerUser.rejected, (state, action) => {
         state.status = "failed";

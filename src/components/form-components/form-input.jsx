@@ -1,11 +1,12 @@
 import React from 'react'
+import styles from '../../css/auth.module.css'
 
 const FormInput = ({name, label, value, handleChange,}) => {
   return (
-        <div className='formGroup'>
-            <label className='labels' htmlFor="title">{label}</label>
+        <div className={styles.formGroup}>
+            <label className={styles.labels} htmlFor="title">{label}</label>
             <input
-            className='input'
+            className={styles.input}
                 type="text"
                 name={name}
                 value={value}
