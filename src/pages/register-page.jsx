@@ -1,12 +1,18 @@
 import React, { useState } from "react";
-import FormInput from "../add-todo/components/form-input";
+import FormInput from "../components/form-components/form-input";
 import { useDispatch, useSelector } from "react-redux";
 import { registerUser } from "../redux/user/registerThunk"; 
+import { useNavigate } from "react-router-dom";
+import styles from '../css/auth.module.css';
+import FormHeader from "../components/form-components/form-header";
+import { useEffect } from "react";
+import Dialog from "../components/dialogs/dialog";
+function RegistrationPage() {
 
-function RegistrationForm({toggleForm}) {
-
+  const navigate = useNavigate(); 
   const dispatch = useDispatch();
-  const { user, status, error } = useSelector((state) => state.register);
+
+  const {status, error } = useSelector((state) => state.register);
 
   const [formData, setFormData] = useState({
     username: "",
@@ -15,6 +21,7 @@ function RegistrationForm({toggleForm}) {
     confirmPassword: ""
   });
 
+  const [openDialog, setOpenDialog] = useState(false);
   const [errors, setErrors] = useState({});
 
   const handleChange = (e) => {
@@ -60,10 +67,48 @@ function RegistrationForm({toggleForm}) {
     }
   };
 
+  // Use useEffect to navigate after successful login
+    useEffect(() => {
+      console.log('registering status');
+      console.log(status);
+      if (status.status === "success") {
+        setOpenDialog(true);
+      }else if(status.status === 'error'){
+        setOpenDialog(true);
+      }
+    }, [status, navigate]);
+
+  const toggleForm = () => {     
+    
+    navigate("/");
+  }
+
+  const handleDialog = () => {
+    
+    if(status.status === 'success'){
+      setOpenDialog(false);
+      toggleForm();
+    }else{
+      setOpenDialog(false);
+    }
+
+  }
+
   return (
-    <form className="form register-form" onSubmit={handleSubmit} noValidate>
+    <div className={styles.container}>
+    
+   {
+    openDialog &&
+    <Dialog title={status.status === 'success' ? 'DONE!' : 'ERROR!'}
+     body={status.status === 'success' ? "Successfully created your account! Log in with your credentials" : 'We encounted an error creating your account!'}
+     handleDialog={handleDialog}/>
+   } 
+
+    <form className={styles.form} onSubmit={handleSubmit} noValidate>
       
       <div>
+
+      <FormHeader/>
       <FormInput
           name="username"
           label="USERNAME"
@@ -106,10 +151,11 @@ function RegistrationForm({toggleForm}) {
         )}
       </div>
 
-      <button className="button" type="submit">REGISTER</button>
-      <p>Already have an account? <span className="toggle-text" onClick={toggleForm}> LOGIN </span> </p>
+      <button className={styles.button} type="submit">REGISTER</button>
+      <p>Already have an account? &nbsp; <span className="toggle-text" onClick={toggleForm}> LOGIN </span> </p>
     </form>
+    </div>
   );
 }
 
-export default RegistrationForm;
+export default RegistrationPage;

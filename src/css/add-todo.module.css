@@ -7,8 +7,8 @@
     margin-bottom: 10px;
     display: flex;
     margin-top: 12px;
-    margin-left: auto;
-    margin-right: auto; 
+    margin-left: 12px;
+    /* margin-right: auto;  */
 }
 
 .button:hover {
@@ -51,3 +51,50 @@
     margin-top: 10px;
 }
 
+.popUpMenuBtn{
+    height: 50px;
+    width: 50px;
+}
+
+.todoCard {
+    display: grid;
+    align-items: center;
+    min-width: 200px;        /* Ensures card doesn't shrink too much */
+    width: auto;   
+    background-color: rgb(252, 252, 252);
+    border-radius: 8px;
+    padding: 10px 20px;
+    margin: 20px 10px;
+  }
+
+  .todoCard:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .todoCardHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    position: relative;
+  }
+
+  .todoDescription {
+    font-size: 16px;
+    color: rgb(170, 170, 189);
+    margin: 10px 0px
+  }
+
+  .todoStatus {
+    font-size: 14px;
+    color: rgb(170, 170, 189);
+  }
+
+  .todoCardBtnGroup {
+    display: flex;
+    justify-content: end;
+  }
+
+  .deleteBtn {
+    background-color: red;
+  }

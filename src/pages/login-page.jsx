@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom"; // Import useNavigate
-import FormInput from "../add-todo/components/form-input";
+import { useNavigate } from "react-router-dom";
+import FormInput from "../components/form-components/form-input";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../redux/user/loginThunk";
+import styles from '../css/auth.module.css';
+import FormHeader from "../components/form-components/form-header";
 
-function LoginForm({ toggleForm }) {
+function LoginPage() {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -61,9 +63,18 @@ function LoginForm({ toggleForm }) {
     }
   }, [status, user, navigate]);
 
+  const toggleForm = () => {      
+    navigate("/register");
+  }
+
   return (
-    <form className="form login-form" onSubmit={handleSubmit} noValidate>
+    <div className={styles.container}>
+      
+<form className={styles.form} onSubmit={handleSubmit} noValidate>
       <div>
+
+        <FormHeader/>
+      
         <FormInput
           name="email"
           label="EMAIL"
@@ -84,10 +95,12 @@ function LoginForm({ toggleForm }) {
         {errors.password && <p style={{ color: "red" }}>{errors.password}</p>}
       </div>
 
-      <button className="button" type="submit">LOGIN</button>
-      <p>Don't have an account? <span className="toggle-text" onClick={toggleForm}>REGISTER</span></p>
+      <button className={styles.button} type="submit">LOGIN</button>
+      <p>Don't have an account? &nbsp; <span className="toggle-text" onClick={toggleForm}>REGISTER</span></p>
     </form>
+     </div>
+    
   );
 }
 
-export default LoginForm;
+export default LoginPage;

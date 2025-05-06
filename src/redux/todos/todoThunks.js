@@ -6,13 +6,15 @@ export const fetchTodos = createAsyncThunk("todos/fetch", async (userId, thunkAP
   try {
     const data = await new Promise((resolve, reject) => {
       $.ajax({
-        type: "GET",
-        url: "http://localhost/BGS-TODO/backend/get_todos.php?user_id=" + userId,
+        type: "POST",
+        url: "http://localhost/BGS-TODO-BACKEND/backend/todos/get_todos.php",
         dataType: "json",
+        data: JSON.stringify({user_id: userId}),
         success: resolve,
         error: (xhr, status, error) => reject(new Error(error))
       });
     });
+    console.log(data);
     return data;
   } catch (err) {
     return thunkAPI.rejectWithValue(err.message);
@@ -26,7 +28,7 @@ export const createTodo = createAsyncThunk("todos/create", async (newTodo, thunk
     const data = await new Promise((resolve, reject) => {
       $.ajax({
         type: "POST",
-        url: "http://localhost/BGS-TODO/backend/add_todo.php",
+        url: "http://localhost/BGS-TODO-BACKEND/backend/todos/add_todo.php",
         contentType: "application/json",
         data: JSON.stringify(newTodo),
         dataType: "json",
@@ -47,7 +49,7 @@ export const updateTodo = createAsyncThunk("todos/update", async (updatedTodo, t
     const data = await new Promise((resolve, reject) => {
       $.ajax({
         type: "POST",
-        url: `http://localhost/BGS-TODO/backend/update_todo.php?id=${updatedTodo.id}`,
+        url: 'http://localhost/BGS-TODO-BACKEND/backend/todos/update_todo.php',
         contentType: "application/json",
         data: JSON.stringify(updatedTodo),
         dataType: 'json',
@@ -64,11 +66,14 @@ export const updateTodo = createAsyncThunk("todos/update", async (updatedTodo, t
 
 
 export const deleteTodo = createAsyncThunk("todos/delete", async (id, thunkAPI) => {
+
   try {
     const data = await new Promise((resolve, reject) => {
       $.ajax({
-        type: "DELETE",
-        url: `http://localhost/BGS-TODO/backend/delete_todo.php?id=${id}`,
+        type: "POST",
+        url: 'http://localhost/BGS-TODO-BACKEND/backend/todos/delete_todo.php',
+        dataType: "json",
+        data: JSON.stringify({id: id}),
         success: resolve,
         error: (xhr, status, error) => reject(new Error(error))
       });

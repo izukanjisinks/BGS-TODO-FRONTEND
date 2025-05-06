@@ -4,16 +4,19 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 export const registerUser = createAsyncThunk(
   "auth/registerUser",
   async (formData, { rejectWithValue }) => {
+    console.log('registering');
     try {
       const response = await $.ajax({
-        url: "http://localhost/BGS-TODO/backend/users/register_user.php", // Replace with your real API URL
+        url: "http://localhost/BGS-TODO-BACKEND/backend/users/register_user.php", 
         method: "POST",
-        data: formData,
+        data: JSON.stringify(formData),
         dataType: "json"
       });
-
+      console.log('reponse result');
+      console.log(response);
       return response;
     } catch (error) {
+      console.log(error);
       return rejectWithValue(error.responseJSON || error.message);
     }
   }
